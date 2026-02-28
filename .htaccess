@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteBase /url/
+
+# Route clean URLs to their PHP files
+RewriteRule ^login/?$ login.php [L]
+RewriteRule ^dashboard/?$ dashboard.php [L]
+RewriteRule ^logout/?$ logout.php [L]
+
+# Ignore physical files and directories (like your /image folder)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route any 4-letter alphanumeric string to the redirector
+RewriteRule ^([a-zA-Z0-9]{4})$ redirect.php?code=$1 [L,QSA]
